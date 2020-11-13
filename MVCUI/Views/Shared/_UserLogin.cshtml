@@ -1,0 +1,61 @@
+﻿@model AppUser
+@if (Session["member"] != null)
+{
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <span class="username">@Model.UserName</span>
+
+        <b class="caret"></b>
+    </a>
+
+    <ul class="dropdown-menu extended logout">
+        <div class="log-arrow-up">
+
+        </div>
+        <li><a href="@Url.Action("Index","AppUser", new { ID = Model.ID })"><i class=" icon-suitcase"></i>Profil</a></li>
+        <li><a href="javascript:;"> <i class=" icon-shopping-cart text-primary"></i>@Model.Orders.Count.ToString()</a></li>
+        <li><a href="@Url.Action("Logout","Home",null)"><i class="icon-key"></i>Çıkış Yap</a></li>
+    </ul>
+}
+else
+{
+    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <span class="username">Giriş Yap</span>
+        <b class="caret"></b>
+    </a>
+
+    <ul class="dropdown-menu extended logout">
+        <div class="log-arrow-up">
+
+        </div>
+
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı", autofocus = true })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10">
+                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Şifre" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button type="submit" class="btn btn-login">Giriş</button> <br />
+                        @Html.ActionLink("Kayıt Ol", "Index", "Register")
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </ul>
+}
+
+
+            
+    

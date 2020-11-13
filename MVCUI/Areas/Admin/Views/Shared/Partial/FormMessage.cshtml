@@ -1,0 +1,19 @@
+﻿@using MVCUI.Areas.Admin.Models.Types
+@if (ViewBag.Status == 1)
+{
+    <div class="alert alert-success fade in">
+        <button data-dismiss="alert" class="close close-sm" type="button">
+            <i class="icon-remove"></i>
+        </button>
+        <strong>Tebrikler ! </strong>@FormMessages.successMessage
+    </div>
+}
+else if (ViewBag.Status == 2)
+{
+    <div class="alert alert-block alert-danger fade in">
+        <button data-dismiss="alert" class="close close-sm" type="button">
+            <i class="icon-remove"></i>
+        </button>
+        <strong>Hata ! </strong> @FormMessages.failedMessage
+    </div>
+}

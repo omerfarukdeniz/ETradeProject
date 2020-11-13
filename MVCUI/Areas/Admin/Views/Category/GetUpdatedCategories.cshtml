@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "GetUpdatedCategories";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+               Güncellenen Kategoriler
+            </header>
+            @Html.Partial("~/Areas/Admin/Views/Category/Partial/CategoryList.cshtml")
+        </section>
+    </div>
+</div>

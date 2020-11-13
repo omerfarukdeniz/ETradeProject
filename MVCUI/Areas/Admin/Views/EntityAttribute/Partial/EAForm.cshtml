@@ -1,0 +1,17 @@
+﻿@model EntityAttribute
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Özellik İsmi")
+        @Html.TextBoxFor(x => x.AttributeName, new { @class = "form-control", @placeholder = "Özellik İsmi" })<br />
+        @Html.ValidationMessageFor(x => x.AttributeName)
+    </div>
+    <div class="form-group">
+        @Html.Label("Açıklama")
+        @Html.TextAreaFor(x => x.Description, new { @class = "form-control", @placeholder = "Açıklama", @style = "resize:none" })
+        @Html.ValidationMessageFor(x => x.Description)
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info">Onayla</button>
+    </div>
+}

@@ -1,0 +1,166 @@
+﻿@model ProductCategoryVM
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Areas/Admin/Content/assets/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
+<script>
+function myProductList() {
+    var a = document.getElementById("Product_ProductName").value;
+        document.getElementById("productName").innerHTML = a;
+    var b = document.getElementById("Product_UnitPrice").value;
+        document.getElementById("unitPrice").innerHTML = b +"₺";
+    var c = document.getElementById("Product_UnitsInStock").value;
+        document.getElementById("unitsInStock").innerHTML = c;
+    var d = document.getElementById("Product_CategoryID");
+    var d2 = d.options[d.selectedIndex].text;
+        document.getElementById("categoryName").innerHTML = d2;
+}
+</script>
+<script>
+   var loadFile = function(event) {
+    var output = document.getElementById('showImage');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
+
+
+<script>
+function myFunction() {
+  document.getElementById("default").submit();
+}
+</script>
+<section id="main-content">
+    <section class="wrapper site-min-height">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Ürün Ekle
+                    </header>
+                    <div class="panel-body">
+                        <div class="stepy-tab">
+                            <ul id="default-titles" class="stepy-titles clearfix">
+                                <li id="default-title-0" class="current-step">
+                                    <div>1.Adım</div>
+                                </li>
+                                <li id="default-title-1" class="">
+                                    <div>2.Adım</div>
+                                </li>
+                                <li id="default-title-2" class="">
+                                    <div>3.Adım</div>
+                                </li>
+                            </ul>
+                        </div>
+                        @using (Html.BeginForm("AddProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "default" }))
+                        {
+                    <fieldset title="1.Adım" class="step" id="default-step-0">
+                        <legend> </legend>
+                        
+                        <div class="form-group">
+                            @Html.Partial("~/Areas/Admin/Views/Shared/Partial/FormMessage.cshtml")
+                            <label class="col-lg-2 control-label">Ürün İsmi</label>
+                            <div class="col-lg-10">
+                                @Html.TextBoxFor(x => x.Product.ProductName, new { @class = "form-control", @placeholder = "Ürün İsmi", @oninput = "myProductList()" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Ürün Fiyatı</label>
+                            <div class="col-lg-10">
+                                @Html.TextBoxFor(x => x.Product.UnitPrice, new { @class = "form-control", @placeholder = "Ürün Fiyat", @oninput = "myProductList()" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Ürün Stok Adeti</label>
+                            <div class="col-lg-10">
+                                @Html.TextBoxFor(x => x.Product.UnitsInStock, new { @class = "form-control", @placeholder = "Ürün Stok", @oninput = "myProductList()" })
+                            </div>
+                        </div>
+                    </fieldset>
+                            <fieldset title="2.Adım" class="step" id="default-step-1">
+                                <legend> </legend>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Kategori</label>
+                                    <div class="col-lg-10">
+                                        @Html.DropDownListFor(x => x.Product.CategoryID, new SelectList(Model.Categories, "ID", "CategoryName", "Lütfen Seçiniz"), new { @class = "form-control", @onchange = "myProductList()" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Ürün Görseli</label>
+                                    <div class="col-lg-10">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <span class="btn btn-white btn-file">
+                                                <span class="fileupload-new"><i class="icon-paper-clip"></i> Select file</span>
+                                                <span class="fileupload-exists"><i class="icon-undo"></i> Change</span>
+                                                <input type="file" class="default" id="image" name="image" accept="Pictures/*" onchange="loadFile(event)" />
+                                            </span>
+                                            <span class="fileupload-preview" style="margin-left:5px;"></span>
+                                            <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset title="3.Adım" class="step" id="default-step-2">
+                                <legend> </legend>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Ürün İsmi</label>
+                                    <div class="col-lg-10">
+                                        <p class="form-control-static" id="productName"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Ürün Fiyatı</label>
+                                    <div class="col-lg-10">
+                                        <p class="form-control-static" id="unitPrice"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Ürün Stok Adeti</label>
+                                    <div class="col-lg-10">
+                                        <p class="form-control-static" id="unitsInStock"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Kategori</label>
+                                    <div class="col-lg-10">
+                                        <p class="form-control-static" id="categoryName"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Ürün Görseli</label>
+                                    <div class="col-md-4">
+                                        <section class="panel">
+                                            <div class="pro-img-box">
+                                                <img id="showImage" src="#" alt="your image" height="144" width="181" style="border-radius:3px;" />
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            @*<input type="submit" class="finish btn btn-danger" value="Finish"/>*@
+                            <button class="finish btn btn-danger" onclick="myFunction()">Kaydet</button>
+                        }
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<script>
+  $(function() {
+      $('#default').stepy({
+          backLabel: 'Geri',
+          block: true,
+          nextLabel: 'İleri',
+          titleClick: true,
+          titleTarget: '.stepy-tab'
+      });
+  });
+</script>
+

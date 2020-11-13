@@ -1,0 +1,18 @@
+﻿@model EntityAttribute
+@{
+    ViewBag.Title = "AddEA";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="row">
+        <div class="col-lg-9">
+            <section class="panel">
+                <header class="panel-heading">
+                    Özellik Ekle
+                </header>
+                <div class="panel-body">
+                    @Html.Partial("~/Areas/Admin/Views/Shared/Partial/FormMessage.cshtml")
+                    @Html.Partial("~/Areas/Admin/Views/EntityAttribute/Partial/EAForm.cshtml")
+                </div>
+            </section>
+        </div>
+    </div>

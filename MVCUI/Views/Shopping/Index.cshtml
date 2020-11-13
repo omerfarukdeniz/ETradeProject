@@ -1,0 +1,66 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PAVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section cart{
+    @if (Session["scart"]!=null)
+    {
+        <li><a href="@Url.Action("CartPage","Shopping")"><i class="icon-shopping-cart"></i>Sepet</a></li>
+    }
+    
+}
+
+<h2>@TempData["emptyCart"]</h2>
+<div class="col-md-9">
+    <section class="panel">
+        <div class="panel-body">
+            <div class="pull-right">
+                <ul class="pagination pagination-sm pro-page-list">
+                    @if (TempData["catID"] != null)
+                    {
+                        <li>@Html.PagedListPager(Model.PagedProducts, page => Url.Action("Index", "Shopping", new { page, categoryID = TempData["catID"] }))</li>
+                    }
+                    else
+                    {
+                        <li>@Html.PagedListPager(Model.PagedProducts, page => Url.Action("Index", "Shopping", new { page }))</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="row product-list">
+        @foreach (Product item in Model.PagedProducts)
+        {
+            <div class="col-md-4">
+                <section class="panel">
+                    <div class="pro-img-box">
+                        @if (item.ImagePath is null)
+                        {
+                            <img src="/Pictures/d1c29fc4-b440-44a6-9343-ee1c276a8429.png" alt="resim yok" height="259" width="146" />
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ProductDetail","Shopping", new { id = item.ID })"><img src="@item.ImagePath" alt="resim yok" height="259" width="146" /></a>
+                        }
+                        <a href="@Url.Action("AddToCart", "Shopping", new { id = item.ID })" class="adtocart">
+                            <i class="icon-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="panel-body text-center">
+                        <h4>
+                            <a href="@Url.Action("ProductDetail","Shopping", new {id=item.ID})" class="pro-title">
+                                @item.ProductName
+                            </a>
+                        </h4>
+                        <p class="price">@item.UnitPrice ₺</p>
+                    </div>
+                </section>
+            </div>
+        }
+    </div>
+</div>

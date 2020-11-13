@@ -1,0 +1,33 @@
+﻿@model Product
+@{
+    ViewBag.Title = "ProductAttributeAdd";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .genislik {
+        width: 300px;
+    }
+</style>
+<h2>@Model.ProductName Özelliği Ekleme Sayfası</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.ID)
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Ürün Özellikleri
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Kategori İsmi</label>
+                    @foreach (EntityAttribute item in ViewBag.AttributeList)
+                    {
+                        <input type="checkbox" name="checkbox" value="@item.ID" />@item.AttributeName
+                    }
+                </div>
+
+                <button class="btn btn-info">Ürün Özellik Ekle</button>
+            </div>
+        </section>
+    </div>
+}

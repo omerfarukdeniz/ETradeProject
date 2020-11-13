@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Aktif Ürünler";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Areas/Admin/Content/custom/deleteRecortTable.js"></script>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Aktif Ürünler
+            </header>
+            @Html.Partial("~/Areas/Admin/Views/Product/Partial/ProductList.cshtml")
+        </section>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Category>
+    <div class="panel-body">
+        <ul class="nav prod-cat">
+            @foreach (Category item in Model)
+            {
+                <li><a href="@Url.Action("Index","Shopping", new {CategoryID=item.ID })"><i class=" icon-angle-right"></i> @item.CategoryName</a></li>
+            }
+        </ul>
+    </div>

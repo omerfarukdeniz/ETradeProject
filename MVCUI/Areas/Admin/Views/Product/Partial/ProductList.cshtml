@@ -1,0 +1,70 @@
+﻿@model List<Product>
+<script src="~/Areas/Admin/Content/custom/deleteRecortTable.js"></script>
+<div class="panel-body">
+    <div class="adv-table">
+        <table class="display table table-bordered table-striped" id="example">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ürüm İsmi</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Ürün Stok</th>
+                    <th>Kategori</th>
+                    <th>Resim</th>
+                    <th>Eklenme Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model is null)
+                {
+                    <tr>
+                        <td colspan="11">Görüntülenecek Kategori Yok</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (Product item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@Html.ActionLink(item.ProductName, "ProductAttributeAdd", "ProductAttribute", new { id = item.ID }, null)</td>
+                            <td>@item.UnitPrice</td>
+                            <td>@item.UnitsInStock</td>
+                            @if (item.Category is null)
+                            {
+                                <td>Kategorisi Yok</td>
+                            }
+                            else
+                            {
+                                <td>@item.Category.CategoryName</td>
+                            }
+                            <td><img src="@item.ImagePath" width="30" height="30" title="@item.ProductName" /></td>
+                            <td>@item.CreatedDate</td>
+                            <td>
+                                @if (item.Status == MODEL.Enums.DataStatus.Updated || item.Status == MODEL.Enums.DataStatus.Inserted)
+                                {
+                                    @Html.ActionLink("Sil","DeleteProduct",new { id = item.ID},new { @class="btn btn-danger btn-xs"})
+                                    @*<a href="" class="btn btn-danger btn-xs" onclick="Delete('/Admin/Product/DeleteProduct/' , @item.ID)"><i class="icon-trash"></i></a>*@
+                                }
+                                <a href="/Admin/Product/UpdateProduct/@item.ID" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Ürüm İsmi</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Ürün Stok</th>
+                    <th>Kategori</th>
+                    <th>Resim</th>
+                    <th>Eklenme Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

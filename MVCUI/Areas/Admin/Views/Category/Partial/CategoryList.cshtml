@@ -1,0 +1,70 @@
+﻿@model List<Category>
+            <div class="panel-body">
+                <div class="adv-table">
+                    <table class="display table table-bordered table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Kategori İsmi</th>
+                                <th>Açıklama</th>
+                                <th>Eklenme Tarihi</th>
+                                <th>Silinme Tarihi</th>
+                                <th>Güncellenme Tarihi</th>
+                                <th>Durumu</th>
+                                <th>Ekleyen</th>
+                                <th>Güncelleyen</th>
+                                <th>Silen</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model is null)
+                            {
+                                <tr>
+                                    <td colspan="11">Görüntülenecek Kategori Yok</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (Category item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ID</td>
+                                        <td>@item.CategoryName</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.CreatedDate</td>
+                                        <td>@item.DeletedDate</td>
+                                        <td>@item.ModifiedDate</td>
+                                        <td>@item.Status</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>@item.UpdatedBy</td>
+                                        <td>@item.DeletedBy</td>
+                                        <td>
+                                            @if (item.Status == MODEL.Enums.DataStatus.Updated || item.Status == MODEL.Enums.DataStatus.Inserted)
+                                            {
+                                                <a href="" class="btn btn-danger btn-xs" onclick="Delete('/Admin/Category/DeleteCategory/',@item.ID)"><i class="icon-trash"></i></a>
+                                            }
+                                            <a href="/Admin/Category/UpdateCategory/@item.ID" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Kategori İsmi</th>
+                                <th>Açıklama</th>
+                                <th>Eklenme Tarihi</th>
+                                <th>Silinme Tarihi</th>
+                                <th>Güncellenme Tarihi</th>
+                                <th>Durumu</th>
+                                <th>Ekleyen</th>
+                                <th>Güncelleyen</th>
+                                <th>Silen</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>

@@ -1,0 +1,61 @@
+﻿@model AppUserVM
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+
+    <div class="row">
+        <aside class="profile-nav col-lg-3">
+            <section class="panel">
+                <div class="user-heading round">
+
+                    <h1>@Model.AppUser.UserName</h1>
+                    <p>@Model.AppUser.Email</p>
+                </div>
+
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#"> <i class="icon-user"></i> Profil</a></li>
+                    <li><a href="@Url.Action("AppUserUpdate","AppUser", new { ID = Model.AppUser.ID})"><i class="icon-edit"></i>Profili Düzenle</a></li>
+                </ul>
+            </section>
+        </aside>
+        <aside class="profile-info col-lg-8">
+            <section class="panel">
+                
+            </section>
+            <section class="panel">
+                <div class="bio-graph-heading">
+                    @Model.AppUserDetail.FirstName @Model.AppUserDetail.LastName
+                </div>
+                <div class="panel-body bio-graph-info">
+                    <h1>Profil Bilgileri</h1>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">İsim :</label><span> @Model.AppUserDetail.FirstName</span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Soyisim :</label> @Model.AppUserDetail.LastName</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Cinsiyet :</label><span>@Model.AppUserDetail.Gender </span> </p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Doğum Tarihi :</label> <span>@Model.AppUserDetail.BirthDate </span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Mail Adresi :</label><span> @Model.AppUser.Email</span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Telefon :</label> <label>@Model.AppUserDetail.Phone</label> </p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Adres 1 :</label><span> @Model.AppUserDetail.Adress1</span></p>
+                        </div>
+                        <div class="bio-row">
+                            <p><label class="control-label col-md-3">Adres 2 :</label> <span>@Model.AppUserDetail.Adress2</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+    </div>

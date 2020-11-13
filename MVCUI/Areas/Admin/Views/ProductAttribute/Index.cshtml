@@ -1,0 +1,41 @@
+﻿@model Product
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .genislik {
+        width: 300px;
+    }
+</style>
+<h2>Ürün Özellik Ekle</h2>
+@using (Html.BeginForm("ProductAttributeListValue", "ProductAttribute", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.ID)
+    <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
+        <thead>
+            <tr>
+                <th>@Model.ProductName Özellikleri</th>
+                <th>@Model.ProductName Özellik Değeri</th>
+
+                <th class="hidden-phone">Sil</th>
+                <th class="hidden-phone">Güncelle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProductAttribute item in Model.ProductAttributes)
+            {
+                <tr class="gradeX">
+                    <td>@item.Attribute.AttributeName</td>
+                    <td>@Html.TextBox("valueName", null, new { @class = "form-control" })</td>
+                    <td class="center hidden-phone">@Html.ActionLink("Sil", "DeletePA", new { id = item.ID }, new { @class = "btn btn-danger" })</td>
+                    <td class="center hidden-phone">@Html.ActionLink("Güncelle", "UpdatePA", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    if (Model.ProductAttributes.Count != 0)
+    {
+        <button class="btn btn-primary">Özellikleri Kaydet</button>
+    }
+}
